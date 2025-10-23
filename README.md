@@ -1,80 +1,67 @@
-Proyecto CRUD de Usuarios con Node.js, Java y Angular
-Descripción del Proyecto
+📌 Proyecto CRUD de Usuarios con Node.js, Java y Angular
+📝 Descripción General
 
-Este proyecto implementa un CRUD completo de usuarios integrando dos backends y un frontend interactivo, con conexión a PostgreSQL.
-El sistema permite gestionar usuarios de manera eficiente, con filtros, paginación y un diseño responsivo, ideal para aplicaciones empresariales o académicas.
+Este proyecto es una aplicación CRUD completa de gestión de usuarios, diseñada para práctica y desarrollo profesional, integrando:
 
-Tecnologías utilizadas:
+Backend Node.js + Express con PostgreSQL
 
-Backend 1: Node.js + Express (API REST con PostgreSQL)
+Backend Java + Spring Boot con PostgreSQL
 
-Backend 2: Java + Spring Boot (API REST con PostgreSQL)
-
-Frontend: Angular (consumiendo ambos backends)
+Frontend Angular 16+ consumiendo ambos backends
 
 Base de datos: PostgreSQL
 
-Funcionalidades principales:
+El sistema permite listar, agregar, editar y eliminar usuarios, con filtros, paginación y modales. Su diseño responsivo garantiza compatibilidad total con dispositivos móviles y escritorio.
 
-Listar todos los usuarios con paginación
+Funcionalidades destacadas:
 
-Agregar, editar y eliminar usuarios
+Listado completo de usuarios con paginación dinámica
 
-Filtrado por nombre y edad
+Filtros por nombre y edad
 
-Modales para formularios de usuario
+Modales para formularios de creación y edición
 
-Diseño responsivo con Bootstrap 5
+Eliminación de usuarios con confirmación
 
-Animaciones ligeras para mejor experiencia de usuario
+Animaciones ligeras para mejorar la experiencia de usuario
 
-Arquitectura del Proyecto
-+-------------------+
-|   PostgreSQL       |
-| (Base de datos)    |
-+--------+----------+
-         ^
-         | (pg / JDBC)
-+--------------+--------------+
-| Backend Node.js + Express   |
-| - Express para rutas        |
-| - pg para conexión a DB     |
-| - API REST: /api/usuarios  |
-+--------------+--------------+
-         ^
-         | (HTTP)
-+--------------+--------------+
-|     Frontend Angular        |
-| - HttpClient consume API    |
-| - Modales y paginación      |
-| - Filtros por nombre/edad   |
-+--------------+--------------+
-         ^
-         | (HTTP)
-+-----------------------------+
-| Backend Java + Spring Boot  |
-| - Spring MVC                |
-| - Spring Data JPA / JDBC    |
-| - API REST: /api/usuarios   |
-+-----------------------------+
+Diseño profesional con Bootstrap 5
 
-Requisitos Previos
+🏗 Arquitectura del Proyecto
+flowchart TD
+    A[PostgreSQL] -->|pg / JDBC| B[Backend Node.js + Express]
+    A -->|JDBC| C[Backend Java + Spring Boot]
+    B -->|HTTP| D[Frontend Angular]
+    C -->|HTTP| D
+    D -->|HTTP Requests| B
+    D -->|HTTP Requests| C
 
-Node.js: versión reciente
 
-Angular CLI: versión compatible con Angular 16+
+Descripción del flujo de datos:
 
-Java JDK: 17 o superior
+El Frontend Angular envía solicitudes HTTP al backend seleccionado (Node.js o Java).
+
+El Backend procesa la solicitud usando consultas a PostgreSQL.
+
+Los datos se devuelven al frontend, donde se renderizan dinámicamente con filtros y paginación.
+
+🛠 Requisitos del Sistema
+
+Node.js: 18+
+
+Angular CLI: 16+
+
+Java JDK: 17+
 
 PostgreSQL: 14+
 
 Herramientas opcionales: Postman, Docker
 
-⚠️ Nota importante: En package.json del backend Node.js, no actualizar automáticamente las versiones de las dependencias, ya que puede romper la compatibilidad del proyecto.
+⚠️ Importante: No actualizar automáticamente las versiones de dependencias en package.json de Node.js, ya que puede romper la compatibilidad del proyecto.
 
-Base de Datos
+🗄 Base de Datos
 
-Creación de base de datos y tabla:
+Creación de la base y tabla:
 
 -- Crear base de datos
 CREATE DATABASE crud_usuarios;
@@ -85,15 +72,15 @@ CREATE DATABASE crud_usuarios;
 -- Crear tabla de usuarios
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
-    nombre VARCHAR(100),
-    correo VARCHAR(100),
-    edad INT
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
+    edad INT NOT NULL
 );
 
 
-Para el backend Java, el campo de correo se llama email en la entidad Usuario.
+Para Spring Boot, el campo correo se llama email en la entidad Usuario.
 
-Parte 1: Backend Node.js + Express
+💻 Backend Node.js + Express
 Instalación y ejecución
 
 Abrir el proyecto backend-node.
@@ -103,7 +90,7 @@ Instalar dependencias:
 npm install
 
 
-Configurar conexión a PostgreSQL en db.js:
+Configurar PostgreSQL en db.js:
 
 const pool = new Pool({
   user: 'TU_USUARIO',
@@ -114,33 +101,33 @@ const pool = new Pool({
 });
 
 
-Iniciar el servidor:
+Iniciar servidor:
 
 npm start
 
 
-Servidor disponible en: http://localhost:3000
+Acceso al servidor: http://localhost:3000
 
-Tecnologías utilizadas
+Tecnologías clave
 
-Express: manejo de rutas y controladores HTTP
+Express: gestión de rutas y controladores HTTP
 
-pg: conexión y consultas a PostgreSQL
+pg: conexión y ejecución de consultas SQL
 
-cors: permitir peticiones desde Angular
+cors: habilita solicitudes desde Angular
 
-body-parser: parsear JSON en requests
+body-parser: parseo de JSON en requests
 
-Endpoints principales
-Método	Ruta	Descripción	Body Ejemplo
-GET	/api/usuarios	Obtener todos los usuarios	-
+Endpoints REST
+Método	Ruta	Descripción	Body de ejemplo
+GET	/api/usuarios	Listar todos los usuarios	-
 POST	/api/usuarios	Crear un usuario	{ "nombre": "David Avila", "correo": "david.avila@gmail.com", "edad": 32 }
-PUT	/api/usuarios/:id	Actualizar usuario	{ "nombre": "David Ávila", "correo": "david.editado@gmail.com", "edad": 37 }
+PUT	/api/usuarios/:id	Actualizar usuario	{ "nombre": "David Ávila Editado", "correo": "david.editado@gmail.com", "edad": 37 }
 DELETE	/api/usuarios/:id	Eliminar usuario	-
-Parte 2: Backend Java + Spring Boot
+💻 Backend Java + Spring Boot
 Instalación y ejecución
 
-Abrir el proyecto en IntelliJ IDEA o Eclipse.
+Abrir proyecto en IntelliJ IDEA o Eclipse.
 
 Configurar conexión a PostgreSQL en application.properties:
 
@@ -153,96 +140,91 @@ spring.jpa.show-sql=true
 
 Se recomienda definir DB_USER y DB_PASSWORD como variables de entorno.
 
-Ejecutar la aplicación:
+Ejecutar:
 
 mvn spring-boot:run
 
 
-Servidor disponible en: http://localhost:8080
+Acceso al servidor: http://localhost:8080
 
-Tecnologías utilizadas
+Tecnologías clave
 
-Spring MVC: organización de controladores y rutas
+Spring MVC: estructura de controladores y rutas
 
-Spring Data JPA: operaciones sobre la base de datos
+Spring Data JPA: operaciones sobre base de datos
 
-PostgreSQL: motor de base de datos
+PostgreSQL: motor de base de datos principal
 
-Lombok (opcional): generar getters/setters automáticamente
+Lombok (opcional): reduce boilerplate con getters/setters
 
-Endpoints principales
-Método	Ruta	Descripción	Body Ejemplo
-GET	/api/usuarios	Obtener todos los usuarios	-
-POST	/api/usuarios	Crear usuario	{ "nombre": "Natalia Gomez", "email": "nati2343@outlook.com", "edad": 19 }
+Endpoints REST
+Método	Ruta	Descripción	Body de ejemplo
+GET	/api/usuarios	Listar todos los usuarios	-
+POST	/api/usuarios	Crear un usuario	{ "nombre": "Natalia Gomez", "email": "nati2343@outlook.com", "edad": 19 }
 PUT	/api/usuarios/:id	Actualizar usuario	{ "nombre": "Natalia Gomez", "email": "natilla25@outlook.com", "edad": 19 }
 DELETE	/api/usuarios/:id	Eliminar usuario	-
-Parte 3: Frontend Angular
+🌐 Frontend Angular
 Instalación y ejecución
 
-Abrir el proyecto frontend.
+Abrir proyecto frontend.
 
 Instalar dependencias:
 
 npm install
 
 
-Iniciar servidor Angular:
+Iniciar servidor:
 
 ng serve
 
 
-Disponible en: http://localhost:4200
+Acceso: http://localhost:4200
 
 Conexión con Backends
 
 Node.js: http://localhost:3000/api/usuarios
 
-Java: http://localhost:8080/api/usuarios
+Java Spring Boot: http://localhost:8080/api/usuarios
 
-Configurar en usuarios.service.ts la URL del backend deseado.
+Configurar en usuarios.service.ts la URL del backend que se desea consumir.
 
 Funcionalidades destacadas
 
 Listado de usuarios con paginación automática
 
-Filtros por nombre y edad
+Filtrado dinámico por nombre y edad
 
 Modales para agregar y editar usuarios
 
-Botones de acción para eliminar usuarios
+Eliminación con confirmación
 
 Diseño responsivo con Bootstrap 5
 
-Animaciones ligeras para mejorar la experiencia de usuario
+Animaciones ligeras para mejorar UX
 
-Reactive forms y binding con NgModel
+Detalles de implementación
 
-Detalles técnicos
+HttpClient para consumo de API REST
 
-HttpClient: consumo de API REST
+NgModel para binding en formularios
 
-NgModel: enlace de datos en formularios
+Bootstrap 5 para diseño, modales y responsividad
 
-Bootstrap 5: diseño, modales y responsividad
+Uso de animate.css para animaciones suaves
 
-Animaciones con animate.css para transiciones suaves
+Validación de formularios con Angular Reactive Forms
 
-Pruebas y Postman
-Ejemplo de uso de Postman
-
+🧪 Pruebas y Postman
 Crear usuario Node.js
-
 POST http://localhost:3000/api/usuarios
-Body: 
+Body:
 {
   "nombre": "David Avila",
   "correo": "david.avila@gmail.com",
   "edad": 32
 }
 
-
 Crear usuario Java
-
 POST http://localhost:8080/api/usuarios
 Body:
 {
@@ -252,4 +234,4 @@ Body:
 }
 
 
-También se puede probar directamente desde el frontend, utilizando los modales para crear, editar y eliminar usuarios, asegurando una experiencia completa de CRUD.
+Se pueden realizar pruebas directamente desde el frontend utilizando los modales.
