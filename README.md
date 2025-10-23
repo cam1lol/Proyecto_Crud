@@ -35,7 +35,6 @@ flowchart TD
     C -->|HTTP| D
     D -->|HTTP Requests| B
     D -->|HTTP Requests| C
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/29245c27-b3ca-4cfc-bced-b9c6d53686b8" />
 
 
 Descripción del flujo de datos:
