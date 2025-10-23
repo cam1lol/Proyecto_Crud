@@ -1,0 +1,105 @@
+<div class="container mt-5">
+  <h2 class="text-center">CRUD de Usuarios</h2>
+
+  <!-- Botón agregar -->
+  <div class="text-center mb-4">
+    <button class="btn btn-success" (click)="abrirModal()">Agregar Usuario</button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="row mb-3">
+    <div class="col-md-6 mb-2">
+      <input type="text" class="form-control" placeholder="Filtrar por nombre"
+             [(ngModel)]="filtroNombre" (ngModelChange)="aplicarFiltros()">
+    </div>
+    <div class="col-md-6 mb-2">
+      <input type="number" class="form-control" placeholder="Filtrar por edad"
+             [(ngModel)]="filtroEdad" (ngModelChange)="aplicarFiltros()">
+    </div>
+  </div>
+
+  <!-- Tabla de usuarios -->
+  <table class="table table-hover table-striped shadow-sm rounded">
+    <thead class="table-dark">
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Edad</th>
+        <th class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuariosPaginados()">
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.correo }}</td>
+        <td>{{ usuario.edad }}</td>
+        <td class="text-center">
+          <button class="btn btn-outline-warning me-2" (click)="editarUsuario(usuario)">Editar</button>
+          <button class="btn btn-outline-danger" (click)="eliminarUsuario(usuario.id!)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- PAGINACIÓN -->
+  <nav *ngIf="totalPaginas() > 1">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="page === 1">
+        <button class="page-link" (click)="cambiarPagina(page - 1)">Anterior</button>
+      </li>
+      <li class="page-item" *ngFor="let p of paginas" [class.active]="page === p">
+        <button class="page-link" (click)="cambiarPagina(p)">{{ p }}</button>
+      </li>
+      <li class="page-item" [class.disabled]="page === totalPaginas()">
+        <button class="page-link" (click)="cambiarPagina(page + 1)">Siguiente</button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Modal -->
+  <div class="modal fade" id="usuarioModal" tabindex="-1" aria-labelledby="usuarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="usuarioModalLabel">{{ usuarioEditando ? 'Editar Usuario' : 'Agregar Usuario' }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="usuarioEditando ? actualizarUsuario() : agregarUsuario()">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="nombre" placeholder="Nombre"
+                     [ngModel]="usuarioEditando ? usuarioEditando.nombre : nuevoUsuario.nombre"
+                     (ngModelChange)="usuarioEditando ? usuarioEditando.nombre = $event : nuevoUsuario.nombre = $event"
+                     name="nombre" required autofocus>
+              <label for="nombre">Nombre</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="correo" placeholder="Correo"
+                     [ngModel]="usuarioEditando ? usuarioEditando.correo : nuevoUsuario.correo"
+                     (ngModelChange)="usuarioEditando ? usuarioEditando.correo = $event : nuevoUsuario.correo = $event"
+                     name="correo" required>
+              <label for="correo">Correo</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="number" class="form-control" id="edad" placeholder="Edad"
+                     [ngModel]="usuarioEditando ? usuarioEditando.edad : nuevoUsuario.edad"
+                     (ngModelChange)="usuarioEditando ? usuarioEditando.edad = $event : nuevoUsuario.edad = $event"
+                     name="edad" required>
+              <label for="edad">Edad</label>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary me-2">
+                {{ usuarioEditando ? 'Actualizar' : 'Agregar' }}
+              </button>
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                      (click)="usuarioEditando = null">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,235 @@
+/* ================== TITULO ================== */
+h2.text-center {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #212529;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* ================== BOTON AGREGAR ================== */
+button.btn-success {
+  margin-top: -0.5rem;
+  font-size: 1rem;
+  padding: 0.5rem 1.2rem;
+  font-weight: 600;
+  color: #f8f9fa;
+  background-color: #343a40; 
+  border: none;
+  border-radius: 6px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+button.btn-success:hover {
+  background-color: #495057;
+  transform: scale(1.05);
+}
+
+/* ================== TABLA ================== */
+table {
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+}
+
+table thead {
+  background-color: #343a40; 
+  color: #f8f9fa; 
+  border-radius: 8px;
+}
+
+table tbody tr {
+  background-color: #ffffff; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+table tbody tr:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+table td, table th {
+  vertical-align: middle !important;
+  padding: 12px 15px;
+}
+
+/* Botones de acciones */
+.btn-outline-warning {
+  border-color: #ffc107;
+  color: #343a40;
+}
+
+.btn-outline-warning:hover {
+  background-color: #ffc107;
+  color: #343a40;
+}
+
+.btn-outline-danger {
+  border-color: #dc3545;
+  color: #343a40;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+/* ================== MODAL ================== */
+.modal-content {
+  border-radius: 12px;
+  background-color: #f8f9fa;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.modal-content:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Inputs del modal */
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.25);
+}
+
+/* Botones del modal */
+button.btn-primary {
+  background-color: #343a40;
+  border: none;
+  color: #f8f9fa;
+}
+
+button.btn-primary:hover {
+  background-color: #495057;
+  transform: scale(1.05);
+}
+
+button.btn-outline-secondary {
+  border-color: #6c757d;
+  color: #343a40;
+}
+
+button.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #f8f9fa;
+  transform: scale(1.05);
+}
+
+/* Animacion botones */
+button.btn:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}
+
+/* Paginacion de botones del modal */
+.pagination .page-link {
+  background-color: #343a40; 
+  color: #f8f9fa;
+  border: 2px solid #343a40;
+  border-radius: 6px;
+  margin: 0 2px;
+  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.pagination .page-link:hover {
+  background-color: #495057;
+  border-color: #495057;
+  transform: scale(1.05);
+  color: #f8f9fa;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #000000;
+  border-color: #000000;
+  color: #f8f9fa;
+}
+
+.pagination .page-item.disabled .page-link {
+  background-color: #aaaaaa;
+  border-color: #aaaaaa;
+  color: #fff;
+}
+
+
+/* ================== RESPONSIVE ================== */
+
+/* Tablets */
+@media (max-width: 992px) {
+  h2.text-center {
+    font-size: 2.2rem;
+  }
+
+  button.btn-success {
+    font-size: 0.95rem;
+    padding: 0.45rem 1rem;
+  }
+
+  table td, table th {
+    padding: 10px 12px;
+  }
+}
+
+/* Moviles */
+@media (max-width: 576px) {
+  h2.text-center {
+    font-size: 1.8rem;
+  }
+
+  button.btn-success {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  /* Tabla responsive */
+  table thead {
+    display: none;
+  }
+
+  table, table tbody, table tr, table td {
+    display: block;
+    width: 100%;
+  }
+
+  table tbody tr {
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 10px;
+  }
+
+  table td {
+    text-align: left;
+    padding-left: 40%;
+    position: relative;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: 35%;
+    text-align: left;
+    font-weight: 600;
+    color: #343a40;
+  }
+
+  /* Modal responsive */
+  .modal-dialog {
+    max-width: 95%;
+    margin: 1.75rem auto;
+  }
+
+  .modal-content {
+    padding: 1rem;
+  }
+}
