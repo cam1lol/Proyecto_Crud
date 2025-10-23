@@ -31,7 +31,6 @@ public class UsuarioUIController {
         return "usuarios";
     }
 
-
     @PostMapping("/guardar")
     public String guardarUsuario(@ModelAttribute Usuario usuario) {
         usuarioService.createUsuario(usuario);
