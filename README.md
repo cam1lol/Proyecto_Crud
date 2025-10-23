@@ -1,4 +1,4 @@
-📌 Proyecto CRUD de Usuarios con Node.js, Java y Angular
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/c0caa324-c589-44bd-a3b7-4f5911b690d9" />📌 Proyecto CRUD de Usuarios con Node.js, Java y Angular
 📝 Descripción General
 
 Este proyecto es una aplicación CRUD completa de gestión de usuarios, diseñada para práctica y desarrollo profesional, integrando:
@@ -35,6 +35,7 @@ flowchart TD
     C -->|HTTP| D
     D -->|HTTP Requests| B
     D -->|HTTP Requests| C
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/29245c27-b3ca-4cfc-bced-b9c6d53686b8" />
 
 
 Descripción del flujo de datos:
